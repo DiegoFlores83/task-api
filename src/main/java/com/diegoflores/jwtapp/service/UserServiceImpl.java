@@ -3,6 +3,7 @@ package com.diegoflores.jwtapp.service;
 import com.diegoflores.jwtapp.dto.UserCreateDTO;
 import com.diegoflores.jwtapp.dto.UserDTO;
 import com.diegoflores.jwtapp.dto.UserRegisterDTO;
+import com.diegoflores.jwtapp.dto.UserUpdateRolesDTO;
 import com.diegoflores.jwtapp.exceptions.ResourceNotFoundException;
 import com.diegoflores.jwtapp.mapper.UserMapper;
 import com.diegoflores.jwtapp.model.Role;
@@ -97,12 +98,12 @@ public class UserServiceImpl implements UserService {
 
         if (dto.getRoles() == null || dto.getRoles().isEmpty()) {
             Role userRole = roleRepository.findByName("ROLE_USER")
-                    .orElseThrow(() -> new RuntimeException("Rol USER no encontrado"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Rol USER no encontrado"));
             roles.add(userRole);
         } else {
             dto.getRoles().forEach(roleName -> {
                 Role role = roleRepository.findByName("ROLE_" + roleName.toUpperCase())
-                        .orElseThrow(() -> new RuntimeException("Rol no encontrado: " + roleName));
+                        .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado: " + roleName));
                 roles.add(role);
             });
         }
@@ -112,6 +113,36 @@ public class UserServiceImpl implements UserService {
         User saved = userRepository.save(user);
 
         return userMapper.toDTO(saved);
+    }
+
+    @Override
+    public UserDTO updateUserRoles(Long userId, UserUpdateRolesDTO dto) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+
+        Set<Role> newRoles = new HashSet<>();
+
+        dto.getRoles().forEach(roleName -> {
+            Role role = roleRepository.findByName("ROLE_" + roleName.toUpperCase())
+                    .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado: " + roleName));
+            newRoles.add(role);
+        });
+
+        user.setRoles(newRoles);
+
+        User update = userRepository.save(user);
+
+        return  userMapper.toDTO(update);
+    }
+
+
+    @Override
+    public void deleteUser(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new ResourceNotFoundException("Usuario no encontrado");
+        }
+        userRepository.deleteById(userId);
     }
 
 
