@@ -5,7 +5,7 @@ Incluye autenticación segura con JWT, gestión de usuarios con roles, manejo de
 
 ---
 
-## 🚀 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - Java 17  
 - Spring Boot 3+  
@@ -18,21 +18,21 @@ Incluye autenticación segura con JWT, gestión de usuarios con roles, manejo de
 
 ---
 
-## ⚙️ Características principales
+## Características principales
 
-### 🔐 Sistema de autenticación y autorización
+### Sistema de autenticación y autorización
 - Login con JWT token  
 - Validación de credenciales  
 - Protección de endpoints según rol  
 - Obtención de usuario y roles desde el token  
 
-### 👤 Gestión de usuarios
+### Gestión de usuarios
 - Registro de usuarios  
-- Asignación dinámica de roles: `ROLE_USER`, `ROLE_ADMIN`  
+- Asignación dinámica de roles: ROLE_USER, ROLE_ADMIN  
 - CRUD administrativo  
 - Separación profesional: Controller, Service/ServiceImpl, Repository  
 
-### 📝 Gestión de tareas por usuario
+### Gestión de tareas por usuario
 - Crear tareas  
 - Editar tareas  
 - Eliminar tareas  
@@ -40,11 +40,11 @@ Incluye autenticación segura con JWT, gestión de usuarios con roles, manejo de
 - Obtener tareas por ID  
 - Cada usuario solo gestiona sus propias tareas  
 
-### 🧩 Uso de DTOs y Mappers
+### Uso de DTOs y Mappers
 - No se exponen entidades directamente  
 - Arquitectura limpia y mantenible  
 
-### 📦 Respuestas estandarizadas (ApiResponse)
+### Respuestas estandarizadas (ApiResponse)
 Incluye:  
 - message  
 - status  
@@ -53,7 +53,7 @@ Incluye:
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 src/main/java
 └── com.diegoflores.jwtapp
@@ -71,19 +71,19 @@ src/main/java
 
 ---
 
-## 📌 Endpoints principales
+## Endpoints principales
 
-### 🔐 Auth
+### Auth
 | Método | Endpoint           | Descripción                     |
 |-------|---------------------|---------------------------------|
 | POST  | `/api/auth/login`   | Iniciar sesión y obtener JWT    |
 
-### 👤 Users (público / registro)
+### Users (público / registro)
 | Método | Endpoint                 | Descripción          |
 |--------|---------------------------|----------------------|
 | POST   | `/api/users/register`     | Registrar usuario    |
 
-### 🛠 Admin (requieren ROLE_ADMIN)
+### Admin (requieren ROLE_ADMIN)
 | Método | Endpoint                         | Descripción                |
 |--------|-----------------------------------|----------------------------|
 | PUT    | `/api/admin/users/{id}/roles`     | Actualizar roles           |
@@ -92,7 +92,7 @@ src/main/java
 
 ---
 
-## 🔑 Ejemplo de Login (Request / Response)
+## Ejemplo de Login (Request / Response)
 
 ### Request
 ```json
